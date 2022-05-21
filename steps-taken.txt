@@ -1,0 +1,47 @@
+1.  CREATING COMPONENTS 
+
+Components are just typescript class's that are instanciated
+by Angular. 
+It MUST end with '.component.ts' and MUST contain:
+    packages imports:
+        witch add functions the component will use.
+        
+        e.g.    import { Component } from '@angular/core';
+
+    Decorator: 
+        this is what hold the informations about the component`
+        such as 'selector' and 'templateUrl'. It holds metadata
+        that tells Angular to know what to do with the class.
+
+        e.g     @Component({
+                    selector: 'app-server';
+                    templateUrl: './server.component.html' <<--- Must exits 
+                                    in the same directory
+                })
+
+    
+    Class:  
+        is the class that is used by angular to lead all parts of this component.
+       
+        e.g     export class ServerComponent {
+                    // some code here //
+                }
+
+
+    After creating, the component needs to be added into 'declarations' array
+    so that Angular can recognize it and load.
+    file: "src/app/app.module.ts"
+    array: 'declarations'
+    add:    'component'
+
+    Also is important to make typescript recognize it and that is done by importing it
+    e.g     import { ServerComponent } from './server/server.component';
+
+    At this point, the component is ready to be used and to do it just add
+    the <selector> into app.component.html. From here, every change made in 
+    server.component.html will be rendered the app page.
+    e.g     <app-server></app-server>
+
+
+
+2.
