@@ -7,5 +7,9 @@ import { Component } from "@angular/core";
 })
     
 export class ServerComponent {
-    name: string = "Minux developer";
+    keyword: string ;
+
+    classMethod() {
+        return this.keyword;
+    }
 }

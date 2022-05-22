@@ -58,3 +58,53 @@ It MUST end with '.component.ts' and MUST contain:
     From here, styles files can be used into templates.
 
     To create styles that every template can use, "src/styles.css" is used instead.
+
+
+3.  DATABINDING AND STRING INTERPOLATION
+
+    Is obvious that during the execution of the app there are excenge of data between 
+    the AppTemplate and the AppBack-end, being so, is important to know how to deal with it
+    correctly. Here is where typescript come into picture.
+    With typescript is possible to do DATABINDING by using STRING INTERPOLATION so data can
+    be treated correctly.
+
+    NOTE:   String interpolation shuld be in the end a string, meaning, cannot be added blocks of
+            code such as 'for loop' or 'if statements', also, it cannot be a multi-line.
+
+    e.g     If a user want to get some information about something especific (can be productName)
+            he could just type its name (or keywork) in search bar. So, to get that keywork is necessary
+            to create a variable that can hold it and send to the 'back-end' and after processing it
+            return the resoults to the page.
+
+            How it can be done?
+
+            1. create a veriable to hold it in component class
+            2. use string interpolation by using '{{ variable }}' format.
+
+            That's it!
+
+            Resuming:
+                Binding propriety is '[]'. with this theres no need to use string interpolation.
+                    e.g.    [src]="imageSorce" == src={{ imageSorce }}
+                
+                String interpolation propriety is '{{ string }}'
+                    It means that the 'string' will replaced by whatever it means according to it definiftion
+                    in the component class. [demonstrated in exemple bellow].
+
+            e.g.    
+                    in component.ts
+                    export class ServerComponent {
+                    // var name: type
+                        keyword: string ;
+
+                        classMethod() {
+                            return this.keyword;
+                        }
+                    }
+
+                    in component.html
+                    <input [(ngModel)]="keyword" type="text">
+
+                    <p>You are seaching for {{ keyword }} to the server</p>
+                    <p>This will produce the same resoult because the 
+                    this method does nothing but returning the variable: {{ classMethod() }}</p>

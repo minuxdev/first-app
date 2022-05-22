@@ -1,15 +1,11 @@
 
 
 <div class="container ">
-    <!--Testing css component-->
-    <p class="test">{{ name }}</p>
-
-    <!-- Testing bootstrap framework -->
-    <div class="">
-        <p class="text-center text-primary text-uppercase shadow p-4 mb-5 bg-white rounded">
-            Testing bootstrap framework...
-        </p>
-    </div>
-
+    <input type="text" [(ngModel)]="keyword">
+    <p>You are seaching for <span class="text-uppercase text-primary">{{ keyword }}</span>  to the server</p>
+    <p>This will produce the same resoult because the 
+        this method does nothing but returning the variable: {{ classMethod() }}</p>
 </div>
+
+
 
