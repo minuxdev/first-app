@@ -108,7 +108,7 @@ It MUST end with '.component.ts' and MUST contain:
 
                     And this is a impple bunding the couse the inputHandler() method will take care of the event 
                     as soon as it is sent. The input value can be caught by using
-                    this.vaue = <HTMLInputElement>.target.value;
+                    this.vaue = (<HTMLInputElement>event.target).value;
                     <input (input)="inputHandler($event)"> 
 
                     <p>You are seaching for {{ keyword }} to the server</p>
@@ -143,3 +143,86 @@ It MUST end with '.component.ts' and MUST contain:
             <button (click)="eventHandler($event)">Click Me</button>
             <p>Hi, {{ name }}! </p>
 
+
+5.  DIRECTIVES
+    Directives are instructions in the DOM.
+    Are conditions passed to the DOM to do a specific task, for example, display a variable value only
+    if it has some value in it, else, ignore it.
+
+    In the DOM it would be something like <p *ngIf="variable">{{ variable }}</p>
+    This paragraph will only be displayed if 'variable' has some value in it.
+
+    Here are some built-in directives:
+        1.  FOR CONDITIONS
+            If condition:       *ngIf="condition"               
+                        <p *ngIf="variable"> // do something //</p>
+
+            If else condition:   *ngIf="condition; esle reference"
+                        <p *ngIf="variable; esle reference"> // do something //</p>
+                        <ng-template #reference>
+                            <p> // do something //</p>
+                        </ng-template>
+
+        2.  FOR STYLING
+            for styling, ngStyle and ngClass directives are used.
+            
+            ngStyle == is used to change CSS propriety
+            
+            ngClass == is used to dynamically remove or add classes existing 
+                        in one of the files listed in StyleUrls list.
+            
+            ngStyle
+                usage:
+                    ngStyle="javascript Style propriety: value"
+                    e.g     [ngStyle]="{backgroundColor: 'red'}"
+
+                            // .component.html
+                            [ngStyle]="{color: getColor()}"
+
+                            // .component.ts
+                            getColor() {
+                                // using ternary operator
+                                return this.name === '' ? 'red' : 'green';
+                            }
+
+                            first: defining a static value for backgroundColor propriety
+                            second: calling 'component.ts' method that return a valid value for bgC propriety.
+
+            ngClass
+                usage:
+                    ngClass="JSON"
+                    JSON MUST have the following key and value:
+                        {className: condition to whether add or not this class}
+                
+                e.g. // .component.html   
+                    <p [ngClass]="{class: name === 'minux'}"> {{ name }}</p>
+
+                    // .component.css
+                    .class {
+                        color: whitesmoke;
+                        text-align: center;
+                        font-size: 2rem;
+                    }
+
+        3.  FOR LOOPING
+            ngFor   is used to loop through an iterable object (like array)
+
+            usage:
+                *ngFor="let tempVar of iterableObject"
+
+                e.g     // .component.html
+                    <div *ngFor="let item of items">
+                        <p>{{ item }}</p>
+                    </div>
+
+                    explenation:
+                        It will create paragraph for each item of items inside the 
+                        'div' tag.
+                
+                    // .component.ts
+                    items: string[] = ['item1', 'item2', 'item3', 'item4'];
+
+                    to get the index of the element
+                        <div *ngFor="let item of items; let i = index">
+                            <p>Index: {{ i }}   value: {{ item }}</p>
+                        </div>

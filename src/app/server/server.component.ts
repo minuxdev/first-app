@@ -9,14 +9,20 @@ import { Component } from "@angular/core";
 export class ServerComponent {
     keyword: string ;
     name: string;
+    color: string;
+    items: string[] = ['item1', 'item2', 'item3', 'item4'];
 
     eventHandler(event) {
-        // when the button is clicked the ret variable 
-        // will be updated
-        return this.name = prompt("Hello, what's your name?");
+        this.name = prompt("Hello, what's your name?");
     }
 
     hoverEvent(event) {
         console.log('Button was hovered');
+    }
+
+    getColor() {
+        //return red if this.name == '' or green if not.
+        // ternary operator
+        return this.name == '' ? 'red' : 'green';
     }
 }
