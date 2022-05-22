@@ -103,8 +103,43 @@ It MUST end with '.component.ts' and MUST contain:
                     }
 
                     in component.html
+                    This is called two-way-binding because the keyword var is updated whenever the input changes
                     <input [(ngModel)]="keyword" type="text">
+
+                    And this is a impple bunding the couse the inputHandler() method will take care of the event 
+                    as soon as it is sent. The input value can be caught by using
+                    this.vaue = <HTMLInputElement>.target.value;
+                    <input (input)="inputHandler($event)"> 
 
                     <p>You are seaching for {{ keyword }} to the server</p>
                     <p>This will produce the same resoult because the 
                     this method does nothing but returning the variable: {{ classMethod() }}</p>
+
+
+
+4.  EVENT BINDING
+
+    As known, interactive apps are basically called reactive apps due the logic behind them.
+    interactive apps are almost allways waiting to respond the user according to his usage.
+    It means that the app must be ready to respond to a bunch of events expected to be fired (triggered)
+    by the user or browser and this is how the binding are handled.
+
+    To get an event is used the following sintax:
+        (event)="methodHandler($event)" 
+        be awere that without '$' won't works. 
+
+        TIP: html event list: https://www.w3schools.com/tags/ref_eventattributes.asp
+                All html events can be converted to Angular events just by removing the 'on' prefix.
+                e.g     html event: onclick     ==      angular event: (click)
+                        html event: onload      ==      angular event: (load), etc.
+    
+    e.g     in component.ts
+            name: string;
+            eventHandler() {
+                return this.name = prompt("What is your name: ");
+            }
+
+            in .component.html
+            <button (click)="eventHandler($event)">Click Me</button>
+            <p>Hi, {{ name }}! </p>
+

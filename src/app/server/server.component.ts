@@ -8,8 +8,15 @@ import { Component } from "@angular/core";
     
 export class ServerComponent {
     keyword: string ;
+    name: string;
 
-    classMethod() {
-        return this.keyword;
+    eventHandler(event) {
+        // when the button is clicked the ret variable 
+        // will be updated
+        return this.name = prompt("Hello, what's your name?");
+    }
+
+    hoverEvent(event) {
+        console.log('Button was hovered');
     }
 }
