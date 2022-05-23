@@ -263,3 +263,23 @@ the typescript file must ends with '.component.ts' and contain:
                 this.imageSrc = imageSrc;
             }
         }
+
+    HOW TO USE A MODULE
+    first of all it need to be imported so that typescript can see it and than
+    instantiate it in a class that can have access to it.
+    
+    e.g. import { Recipe } from "../recipe.module"; // importing Recipe module
+
+        export class RecipeListComponent implements OnInit {
+        // creating a list of Recipe datatype
+        recipes: Recipe[] = [
+                new Recipe(
+                    "test recipe", "is a test of Recipe module",
+                    "https://mznews.co.mz/wp-content/uploads/2021/07/Google.jpg"
+                ),
+                new Recipe(
+                "test recipe", "is a test of Recipe module",
+                "https://mznews.co.mz/wp-content/uploads/2021/07/Google.jpg"
+            )
+            ];
+        }
