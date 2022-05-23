@@ -145,6 +145,7 @@ It MUST end with '.component.ts' and MUST contain:
 
 
 5.  DIRECTIVES
+
     Directives are instructions in the DOM.
     Are conditions passed to the DOM to do a specific task, for example, display a variable value only
     if it has some value in it, else, ignore it.
