@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+
 
 @Component({
     selector: 'app-recipe',
@@ -6,6 +7,14 @@ import { Component } from "@angular/core";
     styleUrls: ['./recipe.component.css']
 })
 
-export class RecipeComponent {
-    name: string = 'recipe'
+// OnInit is an interface [will be explained later]
+export class RecipeComponent implements OnInit {
+
+
+    constructor() { }
+
+
+    ngOnInit(): void {
+        
+    }
 }
