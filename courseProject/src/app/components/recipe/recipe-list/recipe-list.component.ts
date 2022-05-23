@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Recipe } from "../recipe.module"; // importing Recipe module
 
 @Component({
@@ -6,6 +6,7 @@ import { Recipe } from "../recipe.module"; // importing Recipe module
   templateUrl: './recipe-list.component.html',
   styleUrls: ['./recipe-list.component.css']
 })
+
 export class RecipeListComponent implements OnInit {
       // using Recipi module
       recipes: Recipe[] = [
@@ -19,6 +20,7 @@ export class RecipeListComponent implements OnInit {
       )
     ];
 
+    @Input('recipeList') element: {name:string, title: string}
 
   ngOnInit(): void {
   }

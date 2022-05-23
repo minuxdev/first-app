@@ -123,6 +123,49 @@ the typescript file must ends with '.component.ts' and contain:
                     <p>This will produce the same resoult because the 
                     this method does nothing but returning the variable: {{ classMethod() }}</p>
 
+        
+        BINDING TO CUSTOM PROPERTIES
+
+        To create a custom property is used '@Input(alias?)' decorator while defining it in component class.
+        This is how its done:
+            in class component
+            first: import { @Input } from '@angular/core
+            
+            then //item component
+            export class ItemElement {
+                @Input(alias?) element: {name: string, type: string}
+            }
+
+            and collection of items component (here is where the up tag is hosted)
+            export class ItemsCollections {
+            //    listOfItems = matching data type //
+                listOfItems = [
+                    {name: "itemName", type:"itemType"},
+                    {name: "itemName2", type:"itemType2"}
+                ]
+            }
+
+            in html ItemsCollections component
+            <div class="container">
+                <app-component-name
+                    *ngFor="let item of items"
+                    [alias]="listOfItems">  // here is where the binding happens
+                </app-component-name>
+            </div>
+
+            NOTE: Alias is what is used to access this property, however, it isnt mandatory because 
+                    if not defined the property name can be used.
+                  With this in place, any component hosting this component can access and manipulate 
+                 this through component selector to bind it.
+
+            CREATE HTML ELEMENT REFERENCE
+                It is simple done by adding '#' in front of the reference
+                e.g.    <input type="text" #referenceName>
+                        <button (click)="someMethod(referenceName)">SendInput</button>
+                
+                NOTE: this will ONLY be visible in the html component.
+
+
 
 
 4.  EVENT BINDING
@@ -150,6 +193,11 @@ the typescript file must ends with '.component.ts' and contain:
             in .component.html
             <button (click)="eventHandler($event)">Click Me</button>
             <p>Hi, {{ name }}! </p>
+
+
+    
+    
+
 
 
 
