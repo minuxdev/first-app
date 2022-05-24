@@ -123,15 +123,25 @@ the typescript file must ends with '.component.ts' and contain:
                     <p>This will produce the same resoult because the 
                     this method does nothing but returning the variable: {{ classMethod() }}</p>
 
+		NOTE: To use ngModel, make sure 'FormsModule' is imported and included in 'angular.module.ts' as follow
+			import { FormsModule } from '@angular/forms';
+			
+			@NgModule ({
+				declarations: [...],
+				imports: [
+					FormsModule
+				]
+			})
+
         
         BINDING TO CUSTOM PROPERTIES
 
         To create a custom property is used '@Input(alias?)' decorator while defining it in component class.
         This is how its done:
-            in class component
+            in item component
             first: import { @Input } from '@angular/core
             
-            then //item component
+            then in class of item component
             export class ItemElement {
                 @Input(alias?) element: {name: string, type: string}
             }
@@ -148,8 +158,8 @@ the typescript file must ends with '.component.ts' and contain:
             in html ItemsCollections component
             <div class="container">
                 <app-component-name
-                    *ngFor="let item of items"
-                    [alias]="listOfItems">  // here is where the binding happens
+                    *ngFor="let item of listOfItems"
+                    [element (or alias)]="item">  // here is where the binding happens
                 </app-component-name>
             </div>
 
@@ -163,7 +173,7 @@ the typescript file must ends with '.component.ts' and contain:
                 e.g.    <input type="text" #referenceName>
                         <button (click)="someMethod(referenceName)">SendInput</button>
                 
-                NOTE: this will ONLY be visible in the html component.
+                NOTE: this will ONLY be visible in the html component
 
 
 
@@ -194,6 +204,49 @@ the typescript file must ends with '.component.ts' and contain:
             <button (click)="eventHandler($event)">Click Me</button>
             <p>Hi, {{ name }}! </p>
 
+    
+    CREATING AND BINDING CUSTOM EVENTS
+
+        Custom events are created thrught '@Output(alias?)' decorator, also available in '@angular/core'
+        and emited through EventEmitter plus the data to be sent within '<data>'.
+        To properly emit it, the method that will contain the values to be emited is needed.
+        So here are steps to create and bind a custom event:
+
+        from the event emiter: 
+            import { Output, EventEmitter } from '@angular/core'
+
+            export class EmittingEvent {
+                // this will emit the 'sendingEvent' event
+                @Output() customEvent = new EventEmitter<{dataName: string, dataType: string}>();
+
+                name = "shopping";
+                type = "Shoes";
+
+                sendData(){
+                    // this will emit the event with datas to be sent
+                    this.customEvent.emit({
+                        dataName: this.name, dataType: this.type
+                    })
+                }
+            }
+        
+        from component.html event emitter hoster:
+            <div class="container">
+                <app-emitter-comp
+                    (customEvent)="eventReceiver($event)"> // this will keep listening to this event
+                                                            // end send it to eventReceiver method.
+                </app-emitter-comp>
+            </div>
+
+        from component.ts hoster an event receiver is created:
+            //  is important to predict the datatype is expected withing ()
+            eventReceiver(receivedData: {name: string, type: string}) {
+                // do whatever with receivedData
+                console.log(receivedData.name, receivedData.type);
+            }
+
+        NOTE: It works ONLY for PARENT <-> CHILD relationship
+            e.g.    app.component <-> custom.component (src/app/custom/custom.component)
 
     
     

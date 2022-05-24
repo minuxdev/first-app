@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 
 
 @Component({
@@ -9,13 +9,17 @@ import { Component, OnInit } from "@angular/core";
 
 // OnInit is an interface [will be explained later]
 export class RecipeComponent implements OnInit {
-    list_recipe = [{name: "Recipe 1", type:"Recipe"},
-    {name: "Recipe 1", type:"Recipe"}]
+    @Output() customEvent = new EventEmitter<{dataName: string}>();
+    // (sendEvent)="receiveItemData($event)"
+    list_recipe = [
+        {name: "Recipe 1", type:"Recipe"}
+    ]
 
     constructor() { }
-
 
     ngOnInit(): void {
         
     }
+
+
 }
